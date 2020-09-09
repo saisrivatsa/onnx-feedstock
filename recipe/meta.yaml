@@ -1,0 +1,70 @@
+{% set name = "onnx" %}
+{% set version = "1.6.0" %}
+# git tag can be any value that works with git checkout
+{% set git_tag = "fea8568cac61a482ed208748fdc0e1a8e4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  git_url: "https://github.com/onnx/onnx.git"
+  git_tag: {{ git_tag }}
+
+build:
+  number: 1
+  string: py{{ python | replace(".", "") }}_{{ PKG_BUILDNUM }}
+  entry_points:
+    - check-model = onnx.bin.checker:check_model
+    - check-node = onnx.bin.checker:check_node
+    - backend-test-tools = onnx.backend.test.cmd_tools:main
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - cmake {{ cmake }}
+    - make                # needed by cmake
+  host:
+    - python {{ python }}
+    - pip
+    - protobuf {{ protobuf }}
+    - libprotobuf {{ protobuf }}
+    - pytest-runner {{ pytest }}
+    - ninja {{ ninja }}
+  run:
+    - python {{ python }}
+    - protobuf {{ protobuf }}
+    - libprotobuf {{ protobuf }}
+    - numpy {{ numpy }}
+    - six {{ six }}
+
+test:
+  requires:
+    - typing {{ typing }}
+  imports:
+    - onnx
+  commands:
+    - check-model --help
+    - check-node --help
+    - backend-test-tools --help
+    - conda inspect linkages -p $PREFIX {{ name }}  # [unix]
+    - conda inspect objects -p $PREFIX {{ name }}   # [osx]
+
+about:
+  home: https://github.com/onnx/onnx/
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: Open Neural Network Exchange library
+  description: |
+    Open Neural Network Exchange (ONNX) is the first step toward an open
+    ecosystem that empowers AI developers to choose the right tools as their
+    project evolves. ONNX provides an open source format for AI models. It
+    defines an extensible computation graph model, as well as definitions of
+    built-in operators and standard data types. Initially we focus on the
+    capabilities needed for inferencing (evaluation).
+
+extra:
+  recipe-maintainers:
+    - open-ce/open-ce-dev-team
