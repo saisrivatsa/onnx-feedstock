@@ -1,7 +1,5 @@
 {% set name = "onnx" %}
-{% set version = "1.6.0" %}
-# git tag can be any value that works with git checkout
-{% set git_tag = "fea8568cac61a482ed208748fdc0e1a8e4" %}
+{% set version = "1.8.0" %}
 
 package:
   name: {{ name|lower }}
@@ -9,7 +7,7 @@ package:
 
 source:
   git_url: "https://github.com/onnx/onnx.git"
-  git_tag: {{ git_tag }}
+  git_tag: v{{ version }}
 
 build:
   number: 1
@@ -38,6 +36,7 @@ requirements:
     - libprotobuf {{ protobuf }}
     - numpy {{ numpy }}
     - six {{ six }}
+    - typing-extensions {{ typing_extensions }}
 
 test:
   requires:
