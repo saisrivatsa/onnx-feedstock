@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 # *****************************************************************
 # (C) Copyright IBM Corp. 2019, 2021. All Rights Reserved.
 #
