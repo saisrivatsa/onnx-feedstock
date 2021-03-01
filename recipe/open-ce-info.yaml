@@ -1,0 +1,12 @@
+third_party_packages:
+- name: pybind11
+  license: BSD-equivalent
+  url:
+    - https://github.com/pybind/pybind11/archive/v2.0.0.tar.gz
+  version: 2.0.0
+- name: google-benchmark
+  license: Apache-2
+  url:
+    - https://github.com/google/benchmark/archive/v1.4.1.tar.gz
+  version: 1.4.1
+
