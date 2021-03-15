@@ -12,7 +12,7 @@ source:
   git_tag: {{ git_tag }}
 
 build:
-  number: 4
+  number: 5
   string: py{{ python | replace(".", "") }}_{{ PKG_BUILDNUM }}
   entry_points:
     - check-model = onnx.bin.checker:check_model
