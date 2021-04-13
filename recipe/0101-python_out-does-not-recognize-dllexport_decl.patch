@@ -1,0 +1,25 @@
+From e75eb97942d2bef47712890b5162734cff173132 Mon Sep 17 00:00:00 2001
+From: Jason Furmanek <furmanek@us.ibm.com>
+Date: Wed, 18 Nov 2020 20:47:31 +0000
+Subject: [PATCH] python_out does not recognize dllexport_decl.
+
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 8351a520..613ea769 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -226,7 +226,7 @@ function(RELATIVE_PROTOBUF_GENERATE_CPP NAME SRCS HDRS ROOT_DIR DEPEND)
+         ${ONNX_DLLEXPORT_STR}${CMAKE_CURRENT_BINARY_DIR})
+     if(BUILD_ONNX_PYTHON)
+       list(APPEND PROTOC_ARGS --python_out
+-                  ${ONNX_DLLEXPORT_STR}${CMAKE_CURRENT_BINARY_DIR})
++                  ${CMAKE_CURRENT_BINARY_DIR})
+       if(ONNX_GEN_PB_TYPE_STUBS)
+         # Haven't figured out how to generate mypy stubs on Windows yet
+         if(NOT WIN32)
+-- 
+2.27.0
+

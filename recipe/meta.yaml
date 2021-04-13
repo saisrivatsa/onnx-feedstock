@@ -10,9 +10,13 @@ package:
 source:
   git_url: "https://github.com/onnx/onnx.git"
   git_tag: {{ git_tag }}
+  patches:
+{% if protobuf=="3.11.2" %}  # open-ce 1.2
+    - 0101-python_out-does-not-recognize-dllexport_decl.patch
+{% endif %}
 
 build:
-  number: 5
+  number: 6
   string: py{{ python | replace(".", "") }}_{{ PKG_BUILDNUM }}
   entry_points:
     - check-model = onnx.bin.checker:check_model
