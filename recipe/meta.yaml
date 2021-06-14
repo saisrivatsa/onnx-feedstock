@@ -16,17 +16,23 @@ source:
 {% endif %}
 
 build:
-  number: 7
+  number: 8
   string: h{{ PKG_HASH }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   entry_points:
     - check-model = onnx.bin.checker:check_model
     - check-node = onnx.bin.checker:check_node
     - backend-test-tools = onnx.backend.test.cmd_tools:main
+  ignore_run_exports:
+    - libgcc-ng
+    - libstdcxx-ng
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    # Use pins to control cos6/cos7 match
+    - libgcc-ng  {{ libgcc }}
+    - libstdcxx-ng  {{ libstdcxx }}
     - cmake {{ cmake }}
     - make                # needed by cmake
   host:
@@ -36,12 +42,19 @@ requirements:
     - libprotobuf {{ protobuf }}
     - pytest-runner {{ pytest }}
     - ninja {{ ninja }}
+    # Use pins to control cos6/cos7 match
+    - libgcc-ng  {{ libgcc }}
+    - libstdcxx-ng  {{ libstdcxx }}
+
   run:
     - python {{ python }}
     - protobuf {{ protobuf }}
     - libprotobuf {{ protobuf }}
     - numpy {{ numpy }}
     - six {{ six }}
+    # Use pins to control cos6/cos7 match
+    - libgcc-ng  {{ libgcc }}
+    - libstdcxx-ng  {{ libstdcxx }}
 
 test:
   imports:
