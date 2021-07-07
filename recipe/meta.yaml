@@ -16,7 +16,7 @@ source:
 {% endif %}
 
 build:
-  number: 8
+  number: 9
   string: h{{ PKG_HASH }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   entry_points:
     - check-model = onnx.bin.checker:check_model
@@ -35,6 +35,7 @@ requirements:
     - libstdcxx-ng  {{ libstdcxx }}
     - cmake {{ cmake }}
     - make                # needed by cmake
+    - libprotobuf {{ protobuf }}
   host:
     - python {{ python }}
     - pip

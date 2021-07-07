@@ -17,4 +17,13 @@
 export ONNX_ML=1
 export CONDA_PREFIX="$PREFIX"  # build script looks at this, but not set on
 
+# Let's be explicit with CMake.
+export CMAKE_ARGS="${CMAKE_ARGS} -DProtobuf_PROTOC_EXECUTABLE=$BUILD_PREFIX/bin/protoc -DProtobuf_LIBRARY=$PREFIX/lib/libprotobuf${SHLIB_EXT}"
+export CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_AR=${AR}"
+export CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_LINKER=${LD}"
+export CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_NM=${NM}"
+export CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_OBJCOPY=${OBJCOPY}"
+export CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_OBJDUMP=${OBJDUMP}"
+export CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_RANLIB=${RANLIB}"
+export CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_STRIP=${STRIP}"
 python -m pip install --no-deps --ignore-installed --verbose .
