@@ -1,7 +1,5 @@
 {% set name = "onnx" %}
-{% set version = "1.6.0" %}
-# git tag can be any value that works with git checkout
-{% set git_tag = "fea8568cac61a482ed208748fdc0e1a8e4" %}
+{% set version = "1.7.0" %}
 
 package:
   name: {{ name|lower }}
@@ -9,14 +7,10 @@ package:
 
 source:
   git_url: "https://github.com/onnx/onnx.git"
-  git_tag: {{ git_tag }}
-  patches:
-{% if protobuf=="3.11.2" %}  # open-ce 1.2
-    - 0101-python_out-does-not-recognize-dllexport_decl.patch
-{% endif %}
+  git_rev: v{{ version }}
 
 build:
-  number: 10
+  number: 1
   string: h{{ PKG_HASH }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   entry_points:
     - check-model = onnx.bin.checker:check_model
