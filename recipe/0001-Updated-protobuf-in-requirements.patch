@@ -1,0 +1,21 @@
+From 8e8c8915fc7f464a9ccf887f7d87fd839c925b55 Mon Sep 17 00:00:00 2001
+From: Nishidha Panpaliya <npanpa23@in.ibm.com>
+Date: Thu, 16 Mar 2023 14:51:51 +0000
+Subject: [PATCH] Updated protobuf in requirements
+
+---
+ requirements.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/requirements.txt b/requirements.txt
+index 5e98ada0..e589f302 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -1,3 +1,3 @@
+ numpy >= 1.16.6 # TODO: update once TensorFlow 2.6 is end of life
+-protobuf >= 3.20.2, < 4
++protobuf >= 4.21
+ typing-extensions >= 3.6.2.1
+-- 
+2.34.1
+
