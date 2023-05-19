@@ -8,9 +8,11 @@ package:
 source:
   git_url: "https://github.com/onnx/onnx.git"
   git_rev: v{{ version }}
+  patches:
+    - 0101-CVE-2022-25882.patch
 
 build:
-  number: 2
+  number: 3
   string: h{{ PKG_HASH }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   entry_points:
     - check-model = onnx.bin.checker:check_model
