@@ -1,0 +1,56 @@
+README FOR ONNX-1.16.0:
+
+clone the git repo : git clone -b v1.16.0 https://github.com/onnx/onnx
+
+mkdir onnx-prefix
+
+change directory to onnx :
+
+cd onnx
+git submodule update --init --recursive
+
+make some changes in requirements-dev.txt, requrments.txt file and requirements-reference.txt to use protobuf as 4.21.12 :-
+ 	- that is : protobuf==4.21.12
+
+export ONNX_ML=1
+export PREFIX=/root/onnx-prefix
+export CONDA_PREFIX="$PREFIX"
+
+if ppc_arch == p10: (Set these below)
+
+echo $GCC_HOME - gives the loc (/opt/rh/gcc-toolset-12/root/usr)
+
+export gcc_home=/opt/rh/gcc-toolset-12/root/usr
+
+AR=$gcc_home/bin/ar
+LD=$gcc_home/bin/ld
+NM=$gcc_home/bin/nm
+OBJCOPY=$gcc_home/bin/objcopy
+OBJDUMP=$gcc_home/bin/objdump
+RANLIB=$gcc_home/bin/ranlib
+STRIP=$gcc_home/bin/strip
+
+Set CMAKE ARGUMENTS:
+
+export CMAKE_ARGS=""
+export CMAKE_ARGS="${CMAKE_ARGS} -DONNX_USE_LITE_PROTO=ON"
+export CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_AR=${AR}"
+export CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_LINKER=${LD}"
+export CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_NM=${NM}"
+export CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_OBJCOPY=${OBJCOPY}"
+export CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_OBJDUMP=${OBJDUMP}"
+export CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_RANLIB=${RANLIB}"
+export CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_STRIP=${STRIP}"
+export CMAKE_ARGS="${CMAKE_ARGS} -DCMAKE_INSTALL_PREFIX=$PREFIX"
+
+command to build onnx and creating wheel for onnx: 
+
+python -m pip wheel -w dist -vv .
+
+tests for onnx present on meta.yaml as follow :
+
+importing onnx : import onnx
+- check-model --help
+- check-node --help
+- backend-test-tools --help
+
